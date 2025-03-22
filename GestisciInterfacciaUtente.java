@@ -29,7 +29,8 @@ public class GestisciInterfacciaUtente {
             System.out.println("\nScegli una figura geometrica:");
             System.out.println("1. Rettangolo");
             System.out.println("2. Triangolo");
-            System.out.println("3. Esci");
+            System.out.println("3. Cerchio");
+            System.out.println("4. Esci");
 
             int scelta = getNumeroIntero("Inserisci la tua scelta: ");
 
@@ -41,6 +42,9 @@ public class GestisciInterfacciaUtente {
                     gestisciTriangolo();
                     break;
                 case 3:
+                    gestisciCerchio();
+                    break;
+                case 4:
                     System.out.println("Grazie per aver usato il programma. Arrivederci!");
                     continua = false;
                     break;
@@ -75,13 +79,27 @@ public class GestisciInterfacciaUtente {
 
             // Calcolo dell'altezza
             if (triangolo.isEquilatero() || triangolo.isIsoscele()) {
-                // Se il triangolo è equilatero o isoscele, calcola l'altezza rispetto a un lato valido
                 System.out.println("Altezza relativa alla base " + lato1 + ": " + triangolo.calcolaAltezza(lato1));
             } else {
-                // Se il triangolo è scaleno, chiedi all'utente di inserire la base corretta
                 double base = getNumeroDouble("Inserisci la base su cui calcolare l'altezza (deve essere uno dei lati del triangolo): ");
                 System.out.println("Altezza relativa alla base " + base + ": " + triangolo.calcolaAltezza(base));
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // Metodo per gestire il cerchio
+    private void gestisciCerchio() {
+        double raggio = getNumeroDouble("Inserisci il raggio del cerchio: ");
+
+        try {
+            Cerchio cerchio = new Cerchio(raggio);
+            System.out.println("\nProprietà del cerchio:");
+            System.out.println("Raggio: " + raggio);
+            System.out.println("Diametro: " + cerchio.diametro());
+            System.out.println("Area: " + cerchio.area());
+            System.out.println("Circonferenza: " + cerchio.circonferenza());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
